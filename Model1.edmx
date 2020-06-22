@@ -1,0 +1,491 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Database1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Mantencion">
+          <Key>
+            <PropertyRef Name="IdMantencion" />
+          </Key>
+          <Property Name="IdMantencion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TituloMantencion" Type="varchar" MaxLength="50" />
+          <Property Name="FechaEmisionMantencion" Type="date" />
+          <Property Name="FechaRealizacionMantencion" Type="date" />
+          <Property Name="HoraMantencion" Type="time" Precision="7" />
+          <Property Name="Responsable" Type="varchar" MaxLength="50" />
+          <Property Name="TipoMantencion" Type="varchar" MaxLength="50" />
+          <Property Name="ObservacionMantencion" Type="text" />
+          <Property Name="DescripcionMantencion" Type="text" />
+        </EntityType>
+        <EntityType Name="Maquinaria">
+          <Key>
+            <PropertyRef Name="IdMaquinaria" />
+          </Key>
+          <Property Name="IdMaquinaria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreMaquinaria" Type="varchar" MaxLength="50" />
+          <Property Name="TipoMaquinaria" Type="varchar" MaxLength="50" />
+          <Property Name="NumeroMaquinaria" Type="int" />
+          <Property Name="AñoMaquinaria" Type="int" />
+          <Property Name="MarcaMaquinaria" Type="varchar" MaxLength="50" />
+          <Property Name="ModeloMaquinaria" Type="varchar" MaxLength="50" />
+          <Property Name="NumeroMotorMaquinaria" Type="int" />
+          <Property Name="RendimientoMaquinaria" Type="varchar" MaxLength="50" />
+          <Property Name="CapacidadAceiteMaquinaria" Type="int" />
+          <Property Name="CapacidadCombustible" Type="int" />
+        </EntityType>
+        <EntityType Name="Recurso">
+          <Key>
+            <PropertyRef Name="IdRecurso" />
+          </Key>
+          <Property Name="IdRecurso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreRecurso" Type="varchar" MaxLength="50" />
+          <Property Name="DescripcionRecurso" Type="text" />
+          <Property Name="ValorRecurso" Type="int" />
+          <Property Name="FechaAdquision" Type="date" />
+          <Property Name="Stock" Type="int" />
+        </EntityType>
+        <EntityType Name="Repuesto">
+          <Key>
+            <PropertyRef Name="IdRepuesto" />
+          </Key>
+          <Property Name="IdRepuesto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreRepuesto" Type="varchar" MaxLength="50" />
+          <Property Name="StockRepuesto" Type="int" />
+          <Property Name="TipoRepuesto" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Responsable">
+          <Key>
+            <PropertyRef Name="IdResponsable" />
+          </Key>
+          <Property Name="IdResponsable" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreResponsable" Type="varchar" MaxLength="50" />
+          <Property Name="ApellidoResponsable" Type="varchar" MaxLength="50" />
+          <Property Name="RutResponsable" Type="varchar" MaxLength="50" />
+          <Property Name="RolResponsable" Type="varchar" MaxLength="50" />
+          <Property Name="CelularResponsable" Type="int" />
+          <Property Name="CorreoResponsable" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Solicitud">
+          <Key>
+            <PropertyRef Name="IdSolicitud" />
+          </Key>
+          <Property Name="IdSolicitud" Type="int" Nullable="false" />
+          <Property Name="NombreSolicitante" Type="varchar" MaxLength="50" />
+          <Property Name="FechaSolicitud" Type="date" />
+          <Property Name="HoraSolicitud" Type="time" Precision="7" />
+          <Property Name="MaquinariaMantener" Type="varchar" MaxLength="50" />
+          <Property Name="DescripcionSolicitud" Type="text" />
+          <Property Name="Responsable" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="ContraseñaUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="RutUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="CorreoUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="CelularUsuario" Type="int" />
+        </EntityType>
+        <Association Name="FK_Maquinaria_Mantencion">
+          <End Role="Mantencion" Type="Self.Mantencion" Multiplicity="1" />
+          <End Role="Maquinaria" Type="Self.Maquinaria" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Mantencion">
+              <PropertyRef Name="IdMantencion" />
+            </Principal>
+            <Dependent Role="Maquinaria">
+              <PropertyRef Name="IdMaquinaria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recurso_Mantencion">
+          <End Role="Mantencion" Type="Self.Mantencion" Multiplicity="1" />
+          <End Role="Recurso" Type="Self.Recurso" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Mantencion">
+              <PropertyRef Name="IdMantencion" />
+            </Principal>
+            <Dependent Role="Recurso">
+              <PropertyRef Name="IdRecurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Repuesto_Maquinaria">
+          <End Role="Maquinaria" Type="Self.Maquinaria" Multiplicity="1" />
+          <End Role="Repuesto" Type="Self.Repuesto" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Maquinaria">
+              <PropertyRef Name="IdMaquinaria" />
+            </Principal>
+            <Dependent Role="Repuesto">
+              <PropertyRef Name="IdRepuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Responsable_Mantencion">
+          <End Role="Mantencion" Type="Self.Mantencion" Multiplicity="1" />
+          <End Role="Responsable" Type="Self.Responsable" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Mantencion">
+              <PropertyRef Name="IdMantencion" />
+            </Principal>
+            <Dependent Role="Responsable">
+              <PropertyRef Name="IdResponsable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Mantencion">
+          <End Role="Mantencion" Type="Self.Mantencion" Multiplicity="1" />
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Mantencion">
+              <PropertyRef Name="IdMantencion" />
+            </Principal>
+            <Dependent Role="Solicitud">
+              <PropertyRef Name="IdSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1ModelStoreContainer">
+          <EntitySet Name="Mantencion" EntityType="Self.Mantencion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Maquinaria" EntityType="Self.Maquinaria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recurso" EntityType="Self.Recurso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Repuesto" EntityType="Self.Repuesto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Responsable" EntityType="Self.Responsable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Solicitud" EntityType="Self.Solicitud" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Maquinaria_Mantencion" Association="Self.FK_Maquinaria_Mantencion">
+            <End Role="Mantencion" EntitySet="Mantencion" />
+            <End Role="Maquinaria" EntitySet="Maquinaria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recurso_Mantencion" Association="Self.FK_Recurso_Mantencion">
+            <End Role="Mantencion" EntitySet="Mantencion" />
+            <End Role="Recurso" EntitySet="Recurso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repuesto_Maquinaria" Association="Self.FK_Repuesto_Maquinaria">
+            <End Role="Maquinaria" EntitySet="Maquinaria" />
+            <End Role="Repuesto" EntitySet="Repuesto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Responsable_Mantencion" Association="Self.FK_Responsable_Mantencion">
+            <End Role="Mantencion" EntitySet="Mantencion" />
+            <End Role="Responsable" EntitySet="Responsable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Mantencion" Association="Self.FK_Solicitud_Mantencion">
+            <End Role="Mantencion" EntitySet="Mantencion" />
+            <End Role="Solicitud" EntitySet="Solicitud" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Database1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Mantencion">
+          <Key>
+            <PropertyRef Name="IdMantencion" />
+          </Key>
+          <Property Name="IdMantencion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TituloMantencion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaEmisionMantencion" Type="DateTime" Precision="0" />
+          <Property Name="FechaRealizacionMantencion" Type="DateTime" Precision="0" />
+          <Property Name="HoraMantencion" Type="Time" Precision="7" />
+          <Property Name="Responsable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoMantencion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ObservacionMantencion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DescripcionMantencion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Maquinaria" Relationship="Self.FK_Maquinaria_Mantencion" FromRole="Mantencion" ToRole="Maquinaria" />
+          <NavigationProperty Name="Recurso" Relationship="Self.FK_Recurso_Mantencion" FromRole="Mantencion" ToRole="Recurso" />
+          <NavigationProperty Name="Responsable1" Relationship="Self.FK_Responsable_Mantencion" FromRole="Mantencion" ToRole="Responsable" />
+          <NavigationProperty Name="Solicitud" Relationship="Self.FK_Solicitud_Mantencion" FromRole="Mantencion" ToRole="Solicitud" />
+        </EntityType>
+        <EntityType Name="Maquinaria">
+          <Key>
+            <PropertyRef Name="IdMaquinaria" />
+          </Key>
+          <Property Name="IdMaquinaria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreMaquinaria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoMaquinaria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroMaquinaria" Type="Int32" />
+          <Property Name="AñoMaquinaria" Type="Int32" />
+          <Property Name="MarcaMaquinaria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModeloMaquinaria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroMotorMaquinaria" Type="Int32" />
+          <Property Name="RendimientoMaquinaria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CapacidadAceiteMaquinaria" Type="Int32" />
+          <Property Name="CapacidadCombustible" Type="Int32" />
+          <NavigationProperty Name="Mantencion" Relationship="Self.FK_Maquinaria_Mantencion" FromRole="Maquinaria" ToRole="Mantencion" />
+          <NavigationProperty Name="Repuesto" Relationship="Self.FK_Repuesto_Maquinaria" FromRole="Maquinaria" ToRole="Repuesto" />
+        </EntityType>
+        <EntityType Name="Recurso">
+          <Key>
+            <PropertyRef Name="IdRecurso" />
+          </Key>
+          <Property Name="IdRecurso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreRecurso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescripcionRecurso" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ValorRecurso" Type="Int32" />
+          <Property Name="FechaAdquision" Type="DateTime" Precision="0" />
+          <Property Name="Stock" Type="Int32" />
+          <NavigationProperty Name="Mantencion" Relationship="Self.FK_Recurso_Mantencion" FromRole="Recurso" ToRole="Mantencion" />
+        </EntityType>
+        <EntityType Name="Repuesto">
+          <Key>
+            <PropertyRef Name="IdRepuesto" />
+          </Key>
+          <Property Name="IdRepuesto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreRepuesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StockRepuesto" Type="Int32" />
+          <Property Name="TipoRepuesto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Maquinaria" Relationship="Self.FK_Repuesto_Maquinaria" FromRole="Repuesto" ToRole="Maquinaria" />
+        </EntityType>
+        <EntityType Name="Responsable">
+          <Key>
+            <PropertyRef Name="IdResponsable" />
+          </Key>
+          <Property Name="IdResponsable" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreResponsable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoResponsable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RutResponsable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RolResponsable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CelularResponsable" Type="Int32" />
+          <Property Name="CorreoResponsable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Mantencion" Relationship="Self.FK_Responsable_Mantencion" FromRole="Responsable" ToRole="Mantencion" />
+        </EntityType>
+        <EntityType Name="Solicitud">
+          <Key>
+            <PropertyRef Name="IdSolicitud" />
+          </Key>
+          <Property Name="IdSolicitud" Type="Int32" Nullable="false" />
+          <Property Name="NombreSolicitante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaSolicitud" Type="DateTime" Precision="0" />
+          <Property Name="HoraSolicitud" Type="Time" Precision="7" />
+          <Property Name="MaquinariaMantener" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescripcionSolicitud" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Responsable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Mantencion" Relationship="Self.FK_Solicitud_Mantencion" FromRole="Solicitud" ToRole="Mantencion" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContraseñaUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RutUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CelularUsuario" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Maquinaria_Mantencion">
+          <End Role="Mantencion" Type="Self.Mantencion" Multiplicity="1" />
+          <End Role="Maquinaria" Type="Self.Maquinaria" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Mantencion">
+              <PropertyRef Name="IdMantencion" />
+            </Principal>
+            <Dependent Role="Maquinaria">
+              <PropertyRef Name="IdMaquinaria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recurso_Mantencion">
+          <End Role="Mantencion" Type="Self.Mantencion" Multiplicity="1" />
+          <End Role="Recurso" Type="Self.Recurso" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Mantencion">
+              <PropertyRef Name="IdMantencion" />
+            </Principal>
+            <Dependent Role="Recurso">
+              <PropertyRef Name="IdRecurso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Responsable_Mantencion">
+          <End Role="Mantencion" Type="Self.Mantencion" Multiplicity="1" />
+          <End Role="Responsable" Type="Self.Responsable" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Mantencion">
+              <PropertyRef Name="IdMantencion" />
+            </Principal>
+            <Dependent Role="Responsable">
+              <PropertyRef Name="IdResponsable" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Solicitud_Mantencion">
+          <End Role="Mantencion" Type="Self.Mantencion" Multiplicity="1" />
+          <End Role="Solicitud" Type="Self.Solicitud" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Mantencion">
+              <PropertyRef Name="IdMantencion" />
+            </Principal>
+            <Dependent Role="Solicitud">
+              <PropertyRef Name="IdSolicitud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Repuesto_Maquinaria">
+          <End Role="Maquinaria" Type="Self.Maquinaria" Multiplicity="1" />
+          <End Role="Repuesto" Type="Self.Repuesto" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Maquinaria">
+              <PropertyRef Name="IdMaquinaria" />
+            </Principal>
+            <Dependent Role="Repuesto">
+              <PropertyRef Name="IdRepuesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database1Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Mantencion" EntityType="Self.Mantencion" />
+          <EntitySet Name="Maquinaria" EntityType="Self.Maquinaria" />
+          <EntitySet Name="Recurso" EntityType="Self.Recurso" />
+          <EntitySet Name="Repuesto" EntityType="Self.Repuesto" />
+          <EntitySet Name="Responsable" EntityType="Self.Responsable" />
+          <EntitySet Name="Solicitud" EntityType="Self.Solicitud" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_Maquinaria_Mantencion" Association="Self.FK_Maquinaria_Mantencion">
+            <End Role="Mantencion" EntitySet="Mantencion" />
+            <End Role="Maquinaria" EntitySet="Maquinaria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recurso_Mantencion" Association="Self.FK_Recurso_Mantencion">
+            <End Role="Mantencion" EntitySet="Mantencion" />
+            <End Role="Recurso" EntitySet="Recurso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Responsable_Mantencion" Association="Self.FK_Responsable_Mantencion">
+            <End Role="Mantencion" EntitySet="Mantencion" />
+            <End Role="Responsable" EntitySet="Responsable" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Solicitud_Mantencion" Association="Self.FK_Solicitud_Mantencion">
+            <End Role="Mantencion" EntitySet="Mantencion" />
+            <End Role="Solicitud" EntitySet="Solicitud" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repuesto_Maquinaria" Association="Self.FK_Repuesto_Maquinaria">
+            <End Role="Maquinaria" EntitySet="Maquinaria" />
+            <End Role="Repuesto" EntitySet="Repuesto" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Database1ModelStoreContainer" CdmEntityContainer="Database1Entities1">
+          <EntitySetMapping Name="Mantencion">
+            <EntityTypeMapping TypeName="Database1Model.Mantencion">
+              <MappingFragment StoreEntitySet="Mantencion">
+                <ScalarProperty Name="IdMantencion" ColumnName="IdMantencion" />
+                <ScalarProperty Name="TituloMantencion" ColumnName="TituloMantencion" />
+                <ScalarProperty Name="FechaEmisionMantencion" ColumnName="FechaEmisionMantencion" />
+                <ScalarProperty Name="FechaRealizacionMantencion" ColumnName="FechaRealizacionMantencion" />
+                <ScalarProperty Name="HoraMantencion" ColumnName="HoraMantencion" />
+                <ScalarProperty Name="Responsable" ColumnName="Responsable" />
+                <ScalarProperty Name="TipoMantencion" ColumnName="TipoMantencion" />
+                <ScalarProperty Name="ObservacionMantencion" ColumnName="ObservacionMantencion" />
+                <ScalarProperty Name="DescripcionMantencion" ColumnName="DescripcionMantencion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Maquinaria">
+            <EntityTypeMapping TypeName="Database1Model.Maquinaria">
+              <MappingFragment StoreEntitySet="Maquinaria">
+                <ScalarProperty Name="IdMaquinaria" ColumnName="IdMaquinaria" />
+                <ScalarProperty Name="NombreMaquinaria" ColumnName="NombreMaquinaria" />
+                <ScalarProperty Name="TipoMaquinaria" ColumnName="TipoMaquinaria" />
+                <ScalarProperty Name="NumeroMaquinaria" ColumnName="NumeroMaquinaria" />
+                <ScalarProperty Name="AñoMaquinaria" ColumnName="AñoMaquinaria" />
+                <ScalarProperty Name="MarcaMaquinaria" ColumnName="MarcaMaquinaria" />
+                <ScalarProperty Name="ModeloMaquinaria" ColumnName="ModeloMaquinaria" />
+                <ScalarProperty Name="NumeroMotorMaquinaria" ColumnName="NumeroMotorMaquinaria" />
+                <ScalarProperty Name="RendimientoMaquinaria" ColumnName="RendimientoMaquinaria" />
+                <ScalarProperty Name="CapacidadAceiteMaquinaria" ColumnName="CapacidadAceiteMaquinaria" />
+                <ScalarProperty Name="CapacidadCombustible" ColumnName="CapacidadCombustible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recurso">
+            <EntityTypeMapping TypeName="Database1Model.Recurso">
+              <MappingFragment StoreEntitySet="Recurso">
+                <ScalarProperty Name="IdRecurso" ColumnName="IdRecurso" />
+                <ScalarProperty Name="NombreRecurso" ColumnName="NombreRecurso" />
+                <ScalarProperty Name="DescripcionRecurso" ColumnName="DescripcionRecurso" />
+                <ScalarProperty Name="ValorRecurso" ColumnName="ValorRecurso" />
+                <ScalarProperty Name="FechaAdquision" ColumnName="FechaAdquision" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Repuesto">
+            <EntityTypeMapping TypeName="Database1Model.Repuesto">
+              <MappingFragment StoreEntitySet="Repuesto">
+                <ScalarProperty Name="IdRepuesto" ColumnName="IdRepuesto" />
+                <ScalarProperty Name="NombreRepuesto" ColumnName="NombreRepuesto" />
+                <ScalarProperty Name="StockRepuesto" ColumnName="StockRepuesto" />
+                <ScalarProperty Name="TipoRepuesto" ColumnName="TipoRepuesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Responsable">
+            <EntityTypeMapping TypeName="Database1Model.Responsable">
+              <MappingFragment StoreEntitySet="Responsable">
+                <ScalarProperty Name="IdResponsable" ColumnName="IdResponsable" />
+                <ScalarProperty Name="NombreResponsable" ColumnName="NombreResponsable" />
+                <ScalarProperty Name="ApellidoResponsable" ColumnName="ApellidoResponsable" />
+                <ScalarProperty Name="RutResponsable" ColumnName="RutResponsable" />
+                <ScalarProperty Name="RolResponsable" ColumnName="RolResponsable" />
+                <ScalarProperty Name="CelularResponsable" ColumnName="CelularResponsable" />
+                <ScalarProperty Name="CorreoResponsable" ColumnName="CorreoResponsable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Solicitud">
+            <EntityTypeMapping TypeName="Database1Model.Solicitud">
+              <MappingFragment StoreEntitySet="Solicitud">
+                <ScalarProperty Name="IdSolicitud" ColumnName="IdSolicitud" />
+                <ScalarProperty Name="NombreSolicitante" ColumnName="NombreSolicitante" />
+                <ScalarProperty Name="FechaSolicitud" ColumnName="FechaSolicitud" />
+                <ScalarProperty Name="HoraSolicitud" ColumnName="HoraSolicitud" />
+                <ScalarProperty Name="MaquinariaMantener" ColumnName="MaquinariaMantener" />
+                <ScalarProperty Name="DescripcionSolicitud" ColumnName="DescripcionSolicitud" />
+                <ScalarProperty Name="Responsable" ColumnName="Responsable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="Database1Model.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="ContraseñaUsuario" ColumnName="ContraseñaUsuario" />
+                <ScalarProperty Name="RutUsuario" ColumnName="RutUsuario" />
+                <ScalarProperty Name="CorreoUsuario" ColumnName="CorreoUsuario" />
+                <ScalarProperty Name="CelularUsuario" ColumnName="CelularUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

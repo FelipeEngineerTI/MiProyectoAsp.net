@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="333cd9ee91ad430187543ebf0a4ffae2" Name="Diagram1" ZoomLevel="95">
+        <EntityTypeShape EntityType="Database1Model.Mantencion" Width="1.5" PointX="0.5" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Maquinaria" Width="1.5" PointX="6.625" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Recurso" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Repuesto" Width="1.5" PointX="9" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Responsable" Width="1.5" PointX="4.875" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Solicitud" Width="1.5" PointX="2.125" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database1Model.Usuario" Width="1.5" PointX="9.25" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="Database1Model.FK_Maquinaria_Mantencion" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK_Recurso_Mantencion" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK_Responsable_Mantencion" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK_Solicitud_Mantencion" ManuallyRouted="false" />
+        <AssociationConnector Association="Database1Model.FK_Repuesto_Maquinaria" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
